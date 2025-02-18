@@ -1,0 +1,361 @@
+{
+    "questions": [
+        {
+            "id": 1980570,
+            "answerType": 3,
+            "description": "(GABINETE) Inspecionado",
+            "expectedValue": true
+        },
+        {
+            "id": 1980571,
+            "answerType": 3,
+            "description": "(GABINETE) Limpo",
+            "expectedValue": true
+        },
+        {
+            "id": 1980572,
+            "answerType": 3,
+            "description": "(GABINETE) Isolamento térmico intacto",
+            "expectedValue": true
+        },
+        {
+            "id": 1980573,
+            "answerType": 3,
+            "description": "(GABINETE) Tampas com fechamento e estanqueidade normais",
+            "expectedValue": true
+        },
+        {
+            "id": 1980574,
+            "answerType": 3,
+            "description": "(GABINETE) Focos de ferrugem",
+            "expectedValue": false
+        },
+        {
+            "id": 1980575,
+            "answerType": 3,
+            "description": "(GABINETE) Verificadas fixações, chumbações e borracha antivibração",
+            "expectedValue": true
+        },
+        {
+            "id": 1980576,
+            "answerType": 3,
+            "description": "(VENTILADORES) Fixação do motor e ventilador normais",
+            "expectedValue": true
+        },
+        {
+            "id": 1980577,
+            "answerType": 3,
+            "description": "(VENTILADORES) Ruídos e vibrações anormais",
+            "expectedValue": false
+        },
+        {
+            "id": 1980578,
+            "answerType": 3,
+            "description": "(VENTILADORES) Mancais e eixos operacionais",
+            "expectedValue": true
+        },
+        {
+            "id": 1980579,
+            "answerType": 3,
+            "description": "(VENTILADORES) Realizada lubrificação dos mancais",
+            "expectedValue": true
+        },
+        {
+            "id": 1980580,
+            "answerType": 3,
+            "description": "(VENTILADORES) Verificada tensão nas correias",
+            "expectedValue": true
+        },
+        {
+            "id": 1980581,
+            "answerType": 3,
+            "description": "(VENTILADORES) Verificada fixação das polias",
+            "expectedValue": true
+        },
+        {
+            "id": 1980582,
+            "answerType": 3,
+            "description": "(COMPRESSORES) Ruídos e vibrações anormais",
+            "expectedValue": false
+        },
+        {
+            "id": 1980583,
+            "answerType": 3,
+            "description": "(COMPRESSORES) Resistência de aquecimento do cárter com funcionamento normal",
+            "expectedValue": true
+        },
+        {
+            "id": 1980584,
+            "answerType": 3,
+            "description": "(COMPRESSORES) Verificada resistência do isolamento entre bobinas do compressor e massa",
+            "expectedValue": true
+        },
+        {
+            "id": 1980585,
+            "answerType": 3,
+            "description": "(COMPRESSORES) Algum vazamento de óleo",
+            "expectedValue": false
+        },
+        {
+            "id": 1980586,
+            "answerType": 3,
+            "description": "(COMPRESSORES) Verificado o térmico do compressor",
+            "expectedValue": true
+        },
+        {
+            "id": 1980587,
+            "answerType": 3,
+            "description": "(FILTROS DE AR)  Inspecionado",
+            "expectedValue": true
+        },
+        {
+            "id": 2468819,
+            "answerType": 3,
+            "description": "(FILTROS DE AR)  Realizada a limpeza",
+            "expectedValue": true
+        },
+        {
+            "id": 1980589,
+            "answerType": 3,
+            "description": "(FILTROS DE AR)  Realizada a substituição",
+            "expectedValue": false
+        },
+        {
+            "id": 1980590,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)  Vazamento de gás nas uniões, válvulas ou soldas",
+            "expectedValue": false
+        },
+        {
+            "id": 1980591,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)  Verificado o filtro secador",
+            "expectedValue": true
+        },
+        {
+            "id": 1980592,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)  Verificada as válvulas de serviço",
+            "expectedValue": true
+        },
+        {
+            "id": 1980593,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)   Superaquecimento ou sub-resfriamento do gás refrigerante",
+            "expectedValue": true
+        },
+        {
+            "id": 1980594,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)   Verificado o visor de liquido",
+            "expectedValue": true
+        },
+        {
+            "id": 1980595,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)   Válvula solenoide com funcionamento normal",
+            "expectedValue": true
+        },
+        {
+            "id": 2628994,
+            "answerType": 12,
+            "description": "(CIRCUITO FRIGORÍFICO)   Isolamento térmico das tubulações em bom estado"
+        },
+        {
+            "id": 1980598,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)   Aletas das serpentinas amassadas/deformadas",
+            "expectedValue": false
+        },
+        {
+            "id": 1980599,
+            "answerType": 3,
+            "description": "(SISTEMA DE DRENAGEM) Bandeja de condensado limpa",
+            "expectedValue": true
+        },
+        {
+            "id": 1980600,
+            "answerType": 3,
+            "description": "(SISTEMA DE DRENAGEM) Existência de vazamentos",
+            "expectedValue": false
+        },
+        {
+            "id": 1980601,
+            "answerType": 3,
+            "description": "(SISTEMA DE DRENAGEM) Existência de vazamentos",
+            "expectedValue": false
+        },
+        {
+            "id": 1980602,
+            "answerType": 3,
+            "description": "(SISTEMA DE DRENAGEM) Tubulação obstruída",
+            "expectedValue": false
+        },
+        {
+            "id": 1980603,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Funcionamento normal das botoeiras de comando/controles",
+            "expectedValue": true
+        },
+        {
+            "id": 1980604,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Funcionamento normal dos contactores de comando",
+            "expectedValue": true
+        },
+        {
+            "id": 1980605,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Funcionamento normal das lâmpadas de sinalização",
+            "expectedValue": true
+        },
+        {
+            "id": 1980606,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Fusíveis intactos ",
+            "expectedValue": true
+        },
+        {
+            "id": 1980607,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Disjuntores em perfeito estado de funcionamento",
+            "expectedValue": true
+        },
+        {
+            "id": 1980608,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Verificada a atuação do termostato",
+            "expectedValue": true
+        },
+        {
+            "id": 1980609,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Verificada a atuação dos pressostatos de alta e baixa",
+            "expectedValue": true
+        },
+        {
+            "id": 1980610,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Relé de tempo com operação normal",
+            "expectedValue": true
+        },
+        {
+            "id": 1980611,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Relés calibrados ",
+            "expectedValue": true
+        },
+        {
+            "id": 1980612,
+            "answerType": 3,
+            "description": "(COMPONENTES ELÉTRICOS) Reapertadas todas as conexões elétricas ",
+            "expectedValue": true
+        },
+        {
+            "id": 2628995,
+            "answerType": 12,
+            "description": "Medir tensão de entrada no sistema (quadro de comando ou de alimentação da máquina) (V)"
+        },
+        {
+            "id": 1980614,
+            "answerType": 2,
+            "description": "Medição de tensão dos ventiladores do evaporador (V)"
+        },
+        {
+            "id": 1980615,
+            "answerType": 2,
+            "description": "Medição de tensão dos ventiladores do condensador (V)"
+        },
+        {
+            "id": 1980616,
+            "answerType": 2,
+            "description": "Medição de tensão dos compressores (V)"
+        },
+        {
+            "id": 2628996,
+            "answerType": 12,
+            "description": "Medir corrente de entrada no sistema ( quadro de comando ou de alimentação da máquina) (A)."
+        },
+        {
+            "id": 1980619,
+            "answerType": 2,
+            "description": "Medição de corrente dos ventiladores do evaporador (A)"
+        },
+        {
+            "id": 1980620,
+            "answerType": 2,
+            "description": "Medição de corrente dos ventiladores do condensador (A)"
+        },
+        {
+            "id": 1980621,
+            "answerType": 2,
+            "description": "Medição de corrente dos compressores (A)"
+        },
+        {
+            "id": 2628997,
+            "answerType": 12,
+            "description": "Medição de temperatura do retorno (ºC)"
+        },
+        {
+            "id": 2628998,
+            "answerType": 12,
+            "description": "Medição de temperatura insuflamento (ºC)"
+        },
+        {
+            "id": 1980624,
+            "answerType": 2,
+            "description": "Medição de temperatura ambiente (ºC)"
+        },
+        {
+            "id": 1980625,
+            "answerType": 2,
+            "description": "Medição de temperatura compressor na descarga (ºC)"
+        },
+        {
+            "id": 1980626,
+            "answerType": 2,
+            "description": "Medição de temperatura compressor na sucção (ºC)"
+        },
+        {
+            "id": 1980627,
+            "answerType": 2,
+            "description": "Medição de temperatura do óleo do compressor  (ºC)"
+        },
+        {
+            "id": 1980628,
+            "answerType": 2,
+            "description": "Medição de pressão de alta (Psi)(lb/pol²)"
+        },
+        {
+            "id": 2468823,
+            "answerType": 2,
+            "description": "Medição de pressão de baixa (Psi)(lb/pol²)"
+        },
+        {
+            "id": 1980630,
+            "answerType": 11,
+            "description": "Assinatura do  responsável"
+        },
+        {
+            "id": 1980631,
+            "answerType": 2,
+            "description": "Medir temperatura na entrada e na saída do ar de condensação"
+        },
+        {
+            "id": 1980632,
+            "answerType": 2,
+            "description": "Medir temperatura na linha do líquido junto ao condensador"
+        },
+        {
+            "id": 1980633,
+            "answerType": 1,
+            "description": "Alguma observação sobre o aparelho ?"
+        },
+        {
+            "id": 2629001,
+            "answerType": 12,
+            "description": "Tirar foto do IP do equipamento ( se não existir fotografar modelo e serie)"
+        }
+    ],
+    "id": 153680
+}
