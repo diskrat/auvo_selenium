@@ -207,118 +207,117 @@ def editar(driver: webdriver.Chrome):
                             )
                             text_field = driver.find_element(By.ID, label_id)
                             if text_field.get_attribute("data-tipo-da-pergunta") == "2":
-                                if text_field.get_attribute(
-                                    "value"
-                                ) == "" or not text_field.get_attribute("value"):
-                                    if question['id'] == 1980614 or question['id'] == 1980615:
-                                        if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                text_field.clear()
+                                if question['id'] == 1980614 or question['id'] == 1980615:
+                                    if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                        text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                    else:
+                                        if equipamento_selecionado[index][0].split()[1] == '220':
                                             text_field.send_keys(f"{equipamento_selecionado[index][1]}")
                                         else:
-                                            if equipamento_selecionado[index][0].split()[1] == '220':
-                                                text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                            else:
-                                                text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
-                                    
-                                    if question['id'] == 2995757:
-                                        if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                            text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
+                                
+                                if question['id'] == 2995757:
+                                    if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                        text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                    else:
+                                        if equipamento_selecionado[index][0].split()[1] == '220':
                                             text_field.send_keys(f"{equipamento_selecionado[index][1]}")
                                         else:
-                                            if equipamento_selecionado[index][0].split()[1] == '220':
-                                                text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                            else:
-                                                text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
+                                            text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
 
-                                    if question['id'] == 1980616:
-                                        if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                if question['id'] == 1980616:
+                                    if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                        text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                    else:
+                                        if equipamento_selecionado[index][0].split()[1] == '220':
                                             text_field.send_keys(f"{equipamento_selecionado[index][1]}")
                                         else:
-                                            if equipamento_selecionado[index][0].split()[1] == '220':
-                                                text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                            else:
-                                                text_field.send_keys(f"{equipamento_selecionado[index][1][0]}")
+                                            text_field.send_keys(f"{equipamento_selecionado[index][1][0]}")
 
-                                    if question["id"] == 1980619:
+                                if question["id"] == 1980619:
 
-                                        text_field.send_keys(equipamento_selecionado[index][4][0])
+                                    text_field.send_keys(equipamento_selecionado[index][4][0])
 
-                                    if question["id"] == 1980620:
-                                        
-                                        text_field.send_keys(equipamento_selecionado[index][4][1])
-                                    if question["id"] == 2995758:
-                                        
-                                        text_field.send_keys(equipamento_selecionado[index][4][3])
-
-                                    if question["id"] == 1980621:
-                                        
-                                        text_field.send_keys(equipamento_selecionado[index][4][2])
-
-                                    if question["id"] == 1980624:
-                                        min = 18
-                                        max = 24
-                                        result = random.randint(min, max)
-                                        text_field.send_keys(f"{result}")
-
-                                    if question["id"] == 1980625:
-                                        min = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["T descarga_inf"]
-                                        )
-                                        max = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["T descarga_sup"]
-                                        )
-                                        result = random.randint(min, max)
-                                        text_field.send_keys(f"{result}")
-
-                                    if question["id"] == 1980626:
-                                        min = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["T sucção_inf"]
-                                        )
-                                        max = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["T sucção_sup"]
-                                        )
-                                        result = random.randint(min, max)
-                                        text_field.send_keys(f"{result}")
-
-                                    if question["id"] == 1980627:
-                                        text_field.send_keys(f"{0}")
-
-                                    if question["id"] == 1980628:
-                                        min = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["410 P alta_inf"]
-                                        )
-                                        max = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["410 P alta_sup"]
-                                        )
-                                        result = random.randint(min, max)
-                                        text_field.send_keys(f"{result}")
-
-                                    if question["id"] == 2468823:
-
-                                        text_field.send_keys(f"{result}")
-
-                                    if question['id'] == 2995759:
-                                        text_field.send_keys(f"{equipamento_selecionado[index][2]}")
-
-                                    if question['id'] == 2995760:
-                                        text_field.send_keys(f"{equipamento_selecionado[index][2]}")
+                                if question["id"] == 1980620:
                                     
+                                    text_field.send_keys(equipamento_selecionado[index][4][1])
+                                if question["id"] == 2995758:
                                     
+                                    text_field.send_keys(equipamento_selecionado[index][4][3])
+
+                                if question["id"] == 1980621:
+                                    
+                                    text_field.send_keys(equipamento_selecionado[index][4][2])
+
+                                if question["id"] == 1980624:
+                                    min = 18
+                                    max = 24
+                                    result = random.randint(min, max)
+                                    text_field.send_keys(f"{result}")
+
+                                if question["id"] == 1980625:
+                                    min = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["T descarga_inf"]
+                                    )
+                                    max = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["T descarga_sup"]
+                                    )
+                                    result = random.randint(min, max)
+                                    text_field.send_keys(f"{result}")
+
+                                if question["id"] == 1980626:
+                                    min = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["T sucção_inf"]
+                                    )
+                                    max = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["T sucção_sup"]
+                                    )
+                                    result = random.randint(min, max)
+                                    text_field.send_keys(f"{result}")
+
+                                if question["id"] == 1980627:
+                                    text_field.send_keys(f"{0}")
+
+                                if question["id"] == 1980628:
+                                    min = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["410 P alta_inf"]
+                                    )
+                                    max = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["410 P alta_sup"]
+                                    )
+                                    result = random.randint(min, max)
+                                    text_field.send_keys(f"{result}")
+
+                                if question["id"] == 2468823:
+
+                                    text_field.send_keys(f"{result}")
+
+                                if question['id'] == 2995759:
+                                    text_field.send_keys(f"{equipamento_selecionado[index][2]}")
+
+                                if question['id'] == 2995760:
+                                    text_field.send_keys(f"{equipamento_selecionado[index][2]}")
+    salvar = driver.find_element(By.ID, "edicao-salvar")
+    driver.execute_script("arguments[0].click();", salvar)        
+                                
 
     
 
 
-driver = get_site(55533777)
+driver = get_site(39860604)
 editar(driver)
 input()
 driver.quit()
