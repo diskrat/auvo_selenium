@@ -65,7 +65,7 @@ def load_equipment_data():
         return json.load(json_file)
 
 
-def escolher_questionarios(driver: webdriver, codigo_questionario: str = 153680):
+def escolher_questionarios(driver: webdriver,dados_equipamento, codigo_questionario: str = 153680):
     questionarios = driver.find_elements(
         By.XPATH, f"//*[@data-codigo='{codigo_questionario}']"
     )
@@ -77,6 +77,7 @@ def escolher_questionarios(driver: webdriver, codigo_questionario: str = 153680)
         if equipamento:
             equipamento_id = ""
             tensao = None
+            corrente,corr_eva,corr_comp,corr_con,corr_tot = None,None,None,None,None
             carga_termica = maquinas[index].split()[0]
             if carga_termica == "e":
                 equipamento_selecionado.append("skip")
@@ -88,6 +89,7 @@ def escolher_questionarios(driver: webdriver, codigo_questionario: str = 153680)
                 elif int(carga_termica) >= 36:
                     equipamento_id = f"{carga_termica}"
                     fase = ""
+                    
                     while fase not in ["t", "m"]:
                         fase = maquinas[index].split()[1]
                         if fase in ["m", "t"]:
@@ -100,15 +102,69 @@ def escolher_questionarios(driver: webdriver, codigo_questionario: str = 153680)
                             else:
                                 equipamento_id += f" {220}"
                                 tensao = random.randint(205, 225)
+                min = float(
+                    dados_equipamento[
+                        equipamento_id
+                    ]["evaporador_inf"]
+                )
+                max = float(
+                    dados_equipamento[
+                        equipamento_id
+                    ]["evaporador_sup"]
+                )
+                corr_eva = random.uniform(min, max)
+                
 
-                equipamento_selecionado.append((equipamento_id, tensao))
+                min = float(
+                    dados_equipamento[
+                        equipamento_id
+                    ]["condensador inferior"]
+                )
+                max = float(
+                    dados_equipamento[
+                        equipamento_id
+                    ]["condensador superior"]
+                )
+                corr_con = random.uniform(min, max)
+                
+
+                min = float(
+                    dados_equipamento[
+                        equipamento_id
+                    ]["compressor inferior"]
+                )
+                max = float(
+                    dados_equipamento[
+                        equipamento_id
+                    ]["compressor superior"]
+                )
+                corr_comp = random.uniform(min, max)
+                
+                corr_tot = (corr_comp+corr_con+corr_eva)
+                corr_comp = locale.format_string(
+                    "%.1f", corr_comp, grouping=True
+                )
+                corr_con = locale.format_string(
+                    "%.1f", corr_con, grouping=True
+                )
+                corr_eva = locale.format_string(
+                    "%.1f", corr_eva, grouping=True
+                )
+                corr_tot = locale.format_string(
+                    "%.1f", corr_tot, grouping=True
+                )
+                corrente = (corr_eva,corr_con,corr_comp,corr_tot)
+                retorno = random.randint(18,24)
+                insuflamento = random.randint(10,retorno)
+
+                equipamento_selecionado.append((equipamento_id, tensao,retorno,insuflamento,corrente))
     return equipamento_selecionado, questionarios
 
 
 def editar(driver: webdriver.Chrome):
     questions = load_questionnaires()["questions"]
     dados_equipamento = load_equipment_data()
-    equipamento_selecionado, questionarios = escolher_questionarios(driver)
+    equipamento_selecionado, questionarios = escolher_questionarios(driver,dados_equipamento)
 
     for index, questionario in enumerate(questionarios):
         if questionario:
@@ -182,71 +238,19 @@ def editar(driver: webdriver.Chrome):
                                                 text_field.send_keys(f"{equipamento_selecionado[index][1][0]}")
 
                                     if question["id"] == 1980619:
-                                        min = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["evaporador_inf"]
-                                        )
-                                        max = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["evaporador_sup"]
-                                        )
-                                        result = random.uniform(min, max)
-                                        result = locale.format_string(
-                                            "%.1f", result, grouping=True
-                                        )
-                                        text_field.send_keys(f"{result}")
+
+                                        text_field.send_keys(equipamento_selecionado[index][4][0])
 
                                     if question["id"] == 1980620:
-                                        min = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["condensador inferior"]
-                                        )
-                                        max = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["condensador superior"]
-                                        )
-                                        result = random.uniform(min, max)
-                                        result = locale.format_string(
-                                            "%.1f", result, grouping=True
-                                        )
-                                        text_field.send_keys(f"{result}")
+                                        
+                                        text_field.send_keys(equipamento_selecionado[index][4][1])
                                     if question["id"] == 2995758:
-                                        min = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["compressor inferior"]+1
-                                        )
-                                        max = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["compressor superior"]+1
-                                        )
-                                        result = random.uniform(min, max)
-                                        result = locale.format_string(
-                                            "%.1f", result, grouping=True
-                                        )
-                                        text_field.send_keys(f"{result}")
+                                        
+                                        text_field.send_keys(equipamento_selecionado[index][4][3])
 
                                     if question["id"] == 1980621:
-                                        min = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["compressor inferior"]
-                                        )
-                                        max = float(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["compressor superior"]
-                                        )
-                                        result = random.uniform(min, max)
-                                        result = locale.format_string(
-                                            "%.1f", result, grouping=True
-                                        )
-                                        text_field.send_keys(f"{result}")
+                                        
+                                        text_field.send_keys(equipamento_selecionado[index][4][2])
 
                                     if question["id"] == 1980624:
                                         min = 18
@@ -300,27 +304,23 @@ def editar(driver: webdriver.Chrome):
                                         text_field.send_keys(f"{result}")
 
                                     if question["id"] == 2468823:
-                                        min = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["410 P baixa_inf"]
-                                        )
-                                        max = int(
-                                            dados_equipamento[
-                                                equipamento_selecionado[index][0]
-                                            ]["410 P baixa_sup"]
-                                        )
-                                        result = random.randint(min, max)
+
                                         text_field.send_keys(f"{result}")
 
-    driver.find_element(By.ID, "edicao-salvar").click()
+                                    if question['id'] == 2995759:
+                                        text_field.send_keys(f"{equipamento_selecionado[index][2]}")
+
+                                    if question['id'] == 2995760:
+                                        text_field.send_keys(f"{equipamento_selecionado[index][2]}")
+                                    
+                                    
 
     
 
 
 driver = get_site(55533777)
 editar(driver)
-driver.execute_script("confirm('fim')")
+input()
 driver.quit()
 # end_time = time.time()  # End timer
 # print(f"Time taken: {end_time - start_time:.6f} seconds")
