@@ -157,9 +157,10 @@
             "expectedValue": true
         },
         {
-            "id": 2628994,
-            "answerType": 12,
-            "description": "(CIRCUITO FRIGORÍFICO)   Isolamento térmico das tubulações em bom estado"
+            "id": 2995756,
+            "answerType": 3,
+            "description": "(CIRCUITO FRIGORÍFICO)   Isolamento térmico das tubulações em bom estado",
+            "expectedValue": true
         },
         {
             "id": 1980598,
@@ -172,12 +173,6 @@
             "answerType": 3,
             "description": "(SISTEMA DE DRENAGEM) Bandeja de condensado limpa",
             "expectedValue": true
-        },
-        {
-            "id": 1980600,
-            "answerType": 3,
-            "description": "(SISTEMA DE DRENAGEM) Existência de vazamentos",
-            "expectedValue": false
         },
         {
             "id": 1980601,
@@ -252,8 +247,8 @@
             "expectedValue": true
         },
         {
-            "id": 2628995,
-            "answerType": 12,
+            "id": 2995757,
+            "answerType": 2,
             "description": "Medir tensão de entrada no sistema (quadro de comando ou de alimentação da máquina) (V)"
         },
         {
@@ -272,8 +267,8 @@
             "description": "Medição de tensão dos compressores (V)"
         },
         {
-            "id": 2628996,
-            "answerType": 12,
+            "id": 2995758,
+            "answerType": 2,
             "description": "Medir corrente de entrada no sistema ( quadro de comando ou de alimentação da máquina) (A)."
         },
         {
@@ -292,13 +287,13 @@
             "description": "Medição de corrente dos compressores (A)"
         },
         {
-            "id": 2628997,
-            "answerType": 12,
+            "id": 2995759,
+            "answerType": 2,
             "description": "Medição de temperatura do retorno (ºC)"
         },
         {
-            "id": 2628998,
-            "answerType": 12,
+            "id": 2995760,
+            "answerType": 2,
             "description": "Medição de temperatura insuflamento (ºC)"
         },
         {
@@ -332,11 +327,6 @@
             "description": "Medição de pressão de baixa (Psi)(lb/pol²)"
         },
         {
-            "id": 1980630,
-            "answerType": 11,
-            "description": "Assinatura do  responsável"
-        },
-        {
             "id": 1980631,
             "answerType": 2,
             "description": "Medir temperatura na entrada e na saída do ar de condensação"
@@ -350,11 +340,6 @@
             "id": 1980633,
             "answerType": 1,
             "description": "Alguma observação sobre o aparelho ?"
-        },
-        {
-            "id": 2629001,
-            "answerType": 12,
-            "description": "Tirar foto do IP do equipamento ( se não existir fotografar modelo e serie)"
         }
     ],
     "id": 153680

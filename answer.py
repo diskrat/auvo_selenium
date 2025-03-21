@@ -12,7 +12,7 @@ def update_questionnaires(questionnaires):
                 if question.get('answerType') == 3:
                     answer = input(f"Set 'expectedValue' for question '{question['description']}' to true or false? ").strip().lower()
                     if answer in ['t', 'f']:
-                        question['expectedValue'] = answer == 'f'
+                        question['expectedValue'] = (answer == 't')
                     else:
                         print(f"Invalid input for question '{question['question']}'. Skipping...")
         else:

@@ -1,4 +1,5 @@
 import random
+from re import X
 import dotenv
 import os
 from selenium import webdriver
@@ -24,21 +25,14 @@ def setup():
 
     driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(10)
-    driver.find_element(By.ID, "editar").click()
-    questionarios_tab = driver.find_element(
-        By.XPATH, "//*[@href='#checklist']"  # Encontra o item Questionarios
-    )
-    wait = WebDriverWait(driver, timeout=5)
-    wait.until(EC.element_to_be_clickable(questionarios_tab))
-    questionarios_tab.click()
     return driver
 
 
-def get_site():
+def get_site(tarefa):
     domain = os.getenv("DOMAIN")
     driver = setup()
+    
     wait = WebDriverWait(driver, timeout=5)
-    tarefa = 40336156
     driver.get(f"{domain}/relatorioTarefas/DetalheTarefa/{tarefa}")
     if driver.current_url == f"{domain}/login":
         driver.find_element(By.CLASS_NAME, "form-login-button").click()
@@ -47,6 +41,14 @@ def get_site():
         driver.get(f"{domain}/relatorioTarefas/DetalheTarefa/{tarefa}")
         wait.until(EC.url_changes(f"{domain}/planejamento"))
     wait.until(EC.element_to_be_clickable((By.ID, "editar")))
+    driver.find_element(By.ID, "editar").click()
+    questionarios_tab = driver.find_element(
+        By.XPATH, "//*[@href='#checklist']"  # Encontra o item Questionarios
+    )
+    wait = WebDriverWait(driver, timeout=5)
+    wait.until(EC.element_to_be_clickable(questionarios_tab))
+    questionarios_tab.click()
+
     return driver
 
 
@@ -152,23 +154,32 @@ def editar(driver: webdriver.Chrome):
                                 if text_field.get_attribute(
                                     "value"
                                 ) == "" or not text_field.get_attribute("value"):
-                                    # if question['id'] == 1980614 or question['id'] == 1980615:
-                                    #     if int(equipamento_selecionado[index][0].split()[0]) < 36:
-                                    #         text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                    #     else:
-                                    #         if equipamento_selecionado[index][0].split()[1] == '220':
-                                    #             text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                    #         else:
-                                    #             text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
+                                    if question['id'] == 1980614 or question['id'] == 1980615:
+                                        if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                            text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                        else:
+                                            if equipamento_selecionado[index][0].split()[1] == '220':
+                                                text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                            else:
+                                                text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
+                                    
+                                    if question['id'] == 2995757:
+                                        if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                            text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                        else:
+                                            if equipamento_selecionado[index][0].split()[1] == '220':
+                                                text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                            else:
+                                                text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
 
-                                    # if question['id'] == 1980616:
-                                    #     if int(equipamento_selecionado[index][0].split()[0]) < 36:
-                                    #         text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                    #     else:
-                                    #         if equipamento_selecionado[index][0].split()[1] == '220':
-                                    #             text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                    #         else:
-                                    #             text_field.send_keys(f"{equipamento_selecionado[index][1][0]}")
+                                    if question['id'] == 1980616:
+                                        if int(equipamento_selecionado[index][0].split()[0]) < 36:
+                                            text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                        else:
+                                            if equipamento_selecionado[index][0].split()[1] == '220':
+                                                text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                            else:
+                                                text_field.send_keys(f"{equipamento_selecionado[index][1][0]}")
 
                                     if question["id"] == 1980619:
                                         min = float(
@@ -203,6 +214,22 @@ def editar(driver: webdriver.Chrome):
                                             "%.1f", result, grouping=True
                                         )
                                         text_field.send_keys(f"{result}")
+                                    if question["id"] == 2995758:
+                                        min = float(
+                                            dados_equipamento[
+                                                equipamento_selecionado[index][0]
+                                            ]["compressor inferior"]+1
+                                        )
+                                        max = float(
+                                            dados_equipamento[
+                                                equipamento_selecionado[index][0]
+                                            ]["compressor superior"]+1
+                                        )
+                                        result = random.uniform(min, max)
+                                        result = locale.format_string(
+                                            "%.1f", result, grouping=True
+                                        )
+                                        text_field.send_keys(f"{result}")
 
                                     if question["id"] == 1980621:
                                         min = float(
@@ -219,6 +246,12 @@ def editar(driver: webdriver.Chrome):
                                         result = locale.format_string(
                                             "%.1f", result, grouping=True
                                         )
+                                        text_field.send_keys(f"{result}")
+
+                                    if question["id"] == 1980624:
+                                        min = 18
+                                        max = 24
+                                        result = random.randint(min, max)
                                         text_field.send_keys(f"{result}")
 
                                     if question["id"] == 1980625:
@@ -280,11 +313,14 @@ def editar(driver: webdriver.Chrome):
                                         result = random.randint(min, max)
                                         text_field.send_keys(f"{result}")
 
+    driver.find_element(By.ID, "edicao-salvar").click()
 
-driver = get_site()
+    
+
+
+driver = get_site(55533777)
 editar(driver)
 driver.execute_script("confirm('fim')")
-input()
 driver.quit()
 # end_time = time.time()  # End timer
 # print(f"Time taken: {end_time - start_time:.6f} seconds")
