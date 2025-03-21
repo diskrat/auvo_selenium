@@ -155,7 +155,7 @@ def escolher_questionarios(driver: webdriver,dados_equipamento, codigo_questiona
                 )
                 corrente = (corr_eva,corr_con,corr_comp,corr_tot)
                 retorno = random.randint(18,24)
-                insuflamento = random.randint(10,retorno)
+                insuflamento = random.randint(10,15)
 
                 equipamento_selecionado.append((equipamento_id, tensao,retorno,insuflamento,corrente))
     return equipamento_selecionado, questionarios
@@ -251,10 +251,7 @@ def editar(driver: webdriver.Chrome):
                                     text_field.send_keys(equipamento_selecionado[index][4][2])
 
                                 if question["id"] == 1980624:
-                                    min = 18
-                                    max = 24
-                                    result = random.randint(min, max)
-                                    text_field.send_keys(f"{result}")
+                                    text_field.send_keys(f"{equipamento_selecionado[index][2]-1}")
 
                                 if question["id"] == 1980625:
                                     min = int(
@@ -302,14 +299,24 @@ def editar(driver: webdriver.Chrome):
                                     text_field.send_keys(f"{result}")
 
                                 if question["id"] == 2468823:
-
+                                    min = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["410 P baixa_inf"]
+                                    )
+                                    max = int(
+                                        dados_equipamento[
+                                            equipamento_selecionado[index][0]
+                                        ]["410 P baixa_sup"]
+                                    )
+                                    result = random.randint(min, max)
                                     text_field.send_keys(f"{result}")
 
                                 if question['id'] == 2995759:
                                     text_field.send_keys(f"{equipamento_selecionado[index][2]}")
 
                                 if question['id'] == 2995760:
-                                    text_field.send_keys(f"{equipamento_selecionado[index][2]}")
+                                    text_field.send_keys(f"{equipamento_selecionado[index][3]}")
     salvar = driver.find_element(By.ID, "edicao-salvar")
     driver.execute_script("arguments[0].click();", salvar)        
                                 
@@ -317,7 +324,7 @@ def editar(driver: webdriver.Chrome):
     
 
 
-driver = get_site(39860604)
+driver = get_site(40326675)
 editar(driver)
 input()
 driver.quit()
