@@ -1,5 +1,4 @@
 import random
-from re import X
 import dotenv
 import os
 from selenium import webdriver
@@ -9,10 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 import locale
 
-# import time
 dotenv.load_dotenv()
 locale.setlocale(locale.LC_ALL, "pt_BR.UTF-8")
-# start_time = time.time()
 
 
 def setup():
@@ -27,11 +24,10 @@ def setup():
     driver.implicitly_wait(10)
     return driver
 
-
 def get_site(tarefa):
     domain = os.getenv("DOMAIN")
     driver = setup()
-    
+
     wait = WebDriverWait(driver, timeout=5)
     driver.get(f"{domain}/relatorioTarefas/DetalheTarefa/{tarefa}")
     if driver.current_url == f"{domain}/login":
@@ -51,21 +47,17 @@ def get_site(tarefa):
 
     return driver
 
-
 def load_questionnaires():
     with open("questionnaires.json", "r", encoding="utf-8") as json_file:
         return json.load(json_file)
-
-
-# TO DO
-
 
 def load_equipment_data():
     with open("processed_data.json", "r", encoding="utf-8") as json_file:
         return json.load(json_file)
 
-
-def escolher_questionarios(driver: webdriver,dados_equipamento, codigo_questionario: str = 153680):
+def escolher_questionarios(
+    driver: webdriver, dados_equipamento, codigo_questionario: str = 153680
+):
     questionarios = driver.find_elements(
         By.XPATH, f"//*[@data-codigo='{codigo_questionario}']"
     )
@@ -77,19 +69,25 @@ def escolher_questionarios(driver: webdriver,dados_equipamento, codigo_questiona
         if equipamento:
             equipamento_id = ""
             tensao = None
-            corrente,corr_eva,corr_comp,corr_con,corr_tot = None,None,None,None,None
+            corrente, corr_eva, corr_comp, corr_con, corr_tot = (
+                None,
+                None,
+                None,
+                None,
+                None,
+            )
             carga_termica = maquinas[index].split()[0]
             if carga_termica == "e":
                 equipamento_selecionado.append("skip")
             else:
-                if int(carga_termica) < 36:
+                if int(carga_termica) < 48:
                     equipamento_id = f"{carga_termica}"
                     tensao = random.randint(205, 225)
 
-                elif int(carga_termica) >= 36:
+                else:
                     equipamento_id = f"{carga_termica}"
                     fase = ""
-                    
+
                     while fase not in ["t", "m"]:
                         fase = maquinas[index].split()[1]
                         if fase in ["m", "t"]:
@@ -103,68 +101,47 @@ def escolher_questionarios(driver: webdriver,dados_equipamento, codigo_questiona
                                 equipamento_id += f" {220}"
                                 tensao = random.randint(205, 225)
                 min = float(
-                    dados_equipamento[
-                        equipamento_id
-                    ]["evaporador_inf"]
-                )
+                    dados_equipamento[equipamento_id]["evaporador_inf"])
                 max = float(
-                    dados_equipamento[
-                        equipamento_id
-                    ]["evaporador_sup"]
-                )
+                    dados_equipamento[equipamento_id]["evaporador_sup"])
                 corr_eva = random.uniform(min, max)
-                
 
                 min = float(
-                    dados_equipamento[
-                        equipamento_id
-                    ]["condensador inferior"]
-                )
+                    dados_equipamento[equipamento_id]["condensador inferior"])
                 max = float(
-                    dados_equipamento[
-                        equipamento_id
-                    ]["condensador superior"]
-                )
+                    dados_equipamento[equipamento_id]["condensador superior"])
                 corr_con = random.uniform(min, max)
-                
 
                 min = float(
-                    dados_equipamento[
-                        equipamento_id
-                    ]["compressor inferior"]
-                )
+                    dados_equipamento[equipamento_id]["compressor inferior"])
                 max = float(
-                    dados_equipamento[
-                        equipamento_id
-                    ]["compressor superior"]
-                )
+                    dados_equipamento[equipamento_id]["compressor superior"])
                 corr_comp = random.uniform(min, max)
-                
-                corr_tot = (corr_comp+corr_con+corr_eva)
+
+                corr_tot = corr_comp + corr_con + corr_eva
                 corr_comp = locale.format_string(
-                    "%.1f", corr_comp, grouping=True
-                )
+                    "%.1f", corr_comp, grouping=True)
                 corr_con = locale.format_string(
-                    "%.1f", corr_con, grouping=True
-                )
+                    "%.1f", corr_con, grouping=True)
                 corr_eva = locale.format_string(
-                    "%.1f", corr_eva, grouping=True
-                )
+                    "%.1f", corr_eva, grouping=True)
                 corr_tot = locale.format_string(
-                    "%.1f", corr_tot, grouping=True
+                    "%.1f", corr_tot, grouping=True)
+                corrente = (corr_eva, corr_con, corr_comp, corr_tot)
+                retorno = random.randint(18, 24)
+                insuflamento = random.randint(10, 15)
+
+                equipamento_selecionado.append(
+                    (equipamento_id, tensao, retorno, insuflamento, corrente)
                 )
-                corrente = (corr_eva,corr_con,corr_comp,corr_tot)
-                retorno = random.randint(18,24)
-                insuflamento = random.randint(10,15)
-
-                equipamento_selecionado.append((equipamento_id, tensao,retorno,insuflamento,corrente))
     return equipamento_selecionado, questionarios
-
 
 def editar(driver: webdriver.Chrome):
     questions = load_questionnaires()["questions"]
     dados_equipamento = load_equipment_data()
-    equipamento_selecionado, questionarios = escolher_questionarios(driver,dados_equipamento)
+    equipamento_selecionado, questionarios = escolher_questionarios(
+        driver, dados_equipamento
+    )
 
     for index, questionario in enumerate(questionarios):
         if questionario:
@@ -200,7 +177,8 @@ def editar(driver: webdriver.Chrome):
                                 "arguments[0].style.color = 'green';", label
                             )
                             if question["expectedValue"] != input_element.is_selected():
-                                driver.execute_script("arguments[0].click();", label)
+                                driver.execute_script(
+                                    "arguments[0].click();", label)
                         if question["answerType"] == 2:
                             driver.execute_script(
                                 "arguments[0].style.color = 'blue';", label
@@ -208,50 +186,111 @@ def editar(driver: webdriver.Chrome):
                             text_field = driver.find_element(By.ID, label_id)
                             if text_field.get_attribute("data-tipo-da-pergunta") == "2":
                                 text_field.clear()
-                                if question['id'] == 1980614 or question['id'] == 1980615:
-                                    if int(equipamento_selecionado[index][0].split()[0]) < 36:
-                                        text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                if (
+                                    question["id"] == 1980614
+                                    or question["id"] == 1980615
+                                ):
+                                    if (
+                                        int(
+                                            equipamento_selecionado[index][0].split()[
+                                                0]
+                                        )
+                                        < 48
+                                    ):
+                                        text_field.send_keys(
+                                            f"{equipamento_selecionado[index][1]}"
+                                        )
                                     else:
-                                        if equipamento_selecionado[index][0].split()[1] == '220':
-                                            text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                        if (
+                                            equipamento_selecionado[index][0].split()[
+                                                1]
+                                            == "220"
+                                        ):
+                                            text_field.send_keys(
+                                                f"{equipamento_selecionado[index][1]}"
+                                            )
                                         else:
-                                            text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
-                                
-                                if question['id'] == 2995757:
-                                    if int(equipamento_selecionado[index][0].split()[0]) < 36:
-                                        text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                    else:
-                                        if equipamento_selecionado[index][0].split()[1] == '220':
-                                            text_field.send_keys(f"{equipamento_selecionado[index][1]}")
-                                        else:
-                                            text_field.send_keys(f"{equipamento_selecionado[index][1][1]}")
+                                            text_field.send_keys(
+                                                f"{equipamento_selecionado[index][1][1]}"
+                                            )
 
-                                if question['id'] == 1980616:
-                                    if int(equipamento_selecionado[index][0].split()[0]) < 36:
-                                        text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                if question["id"] == 2995757:
+                                    if (
+                                        int(
+                                            equipamento_selecionado[index][0].split()[
+                                                0]
+                                        )
+                                        < 48
+                                    ):
+                                        text_field.send_keys(
+                                            f"{equipamento_selecionado[index][1]}"
+                                        )
                                     else:
-                                        if equipamento_selecionado[index][0].split()[1] == '220':
-                                            text_field.send_keys(f"{equipamento_selecionado[index][1]}")
+                                        if (
+                                            equipamento_selecionado[index][0].split()[
+                                                1]
+                                            == "220"
+                                        ):
+                                            text_field.send_keys(
+                                                f"{equipamento_selecionado[index][1]}"
+                                            )
                                         else:
-                                            text_field.send_keys(f"{equipamento_selecionado[index][1][0]}")
+                                            text_field.send_keys(
+                                                f"{equipamento_selecionado[index][1][1]}"
+                                            )
+
+                                if question["id"] == 1980616:
+                                    if (
+                                        int(
+                                            equipamento_selecionado[index][0].split()[
+                                                0]
+                                        )
+                                        < 48
+                                    ):
+                                        text_field.send_keys(
+                                            f"{equipamento_selecionado[index][1]}"
+                                        )
+                                    else:
+                                        if (
+                                            equipamento_selecionado[index][0].split()[
+                                                1]
+                                            == "220"
+                                        ):
+                                            text_field.send_keys(
+                                                f"{equipamento_selecionado[index][1]}"
+                                            )
+                                        else:
+                                            text_field.send_keys(
+                                                f"{equipamento_selecionado[index][1][0]}"
+                                            )
 
                                 if question["id"] == 1980619:
 
-                                    text_field.send_keys(equipamento_selecionado[index][4][0])
+                                    text_field.send_keys(
+                                        equipamento_selecionado[index][4][0]
+                                    )
 
                                 if question["id"] == 1980620:
-                                    
-                                    text_field.send_keys(equipamento_selecionado[index][4][1])
+
+                                    text_field.send_keys(
+                                        equipamento_selecionado[index][4][1]
+                                    )
                                 if question["id"] == 2995758:
-                                    
-                                    text_field.send_keys(equipamento_selecionado[index][4][3])
+
+                                    text_field.send_keys(
+                                        equipamento_selecionado[index][4][3]
+                                    )
 
                                 if question["id"] == 1980621:
-                                    
-                                    text_field.send_keys(equipamento_selecionado[index][4][2])
+
+                                    text_field.send_keys(
+                                        equipamento_selecionado[index][4][2]
+                                    )
 
                                 if question["id"] == 1980624:
-                                    text_field.send_keys(f"{equipamento_selecionado[index][2]-1}")
+                                    text_field.send_keys(
+                                        f"{equipamento_selecionado[index][2]-1}"
+                                    )
 
                                 if question["id"] == 1980625:
                                     min = int(
@@ -312,21 +351,19 @@ def editar(driver: webdriver.Chrome):
                                     result = random.randint(min, max)
                                     text_field.send_keys(f"{result}")
 
-                                if question['id'] == 2995759:
-                                    text_field.send_keys(f"{equipamento_selecionado[index][2]}")
+                                if question["id"] == 2995759:
+                                    text_field.send_keys(
+                                        f"{equipamento_selecionado[index][2]}"
+                                    )
 
-                                if question['id'] == 2995760:
-                                    text_field.send_keys(f"{equipamento_selecionado[index][3]}")
+                                if question["id"] == 2995760:
+                                    text_field.send_keys(
+                                        f"{equipamento_selecionado[index][3]}"
+                                    )
     salvar = driver.find_element(By.ID, "edicao-salvar")
-    driver.execute_script("arguments[0].click();", salvar)        
-                                
+    driver.execute_script("arguments[0].click();", salvar)
 
-    
-
-
-driver = get_site(39899987)
+driver = get_site(39823260)
 editar(driver)
 input()
 driver.quit()
-# end_time = time.time()  # End timer
-# print(f"Time taken: {end_time - start_time:.6f} seconds")
