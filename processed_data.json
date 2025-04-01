@@ -99,27 +99,7 @@
         "P baixa_inf": 45,
         "P baixa_sup": 79
     },
-    "36 380": {
-        "evaporador_inf": 0.3,
-        "evaporador_sup": 0.6,
-        "condensador inferior": 0.4,
-        "condensador superior": 0.8,
-        "compressor inferior": 7.0,
-        "compressor superior": 9.0,
-        "T descarga_inf": 85,
-        "T descarga_sup": 95,
-        "T sucção_inf": 10,
-        "T sucção_sup": 14,
-        "410 P alta_inf": 319,
-        "410 P alta_sup": 360,
-        "410 P baixa_inf": 120,
-        "410 P baixa_sup": 160,
-        "22_P_alta_inf": 230,
-        "22_P_alta_sup": 260,
-        "P baixa_inf": 45,
-        "P baixa_sup": 80
-    },
-    "36 220": {
+    "36": {
         "evaporador_inf": 0.3,
         "evaporador_sup": 0.6,
         "condensador inferior": 0.5,
